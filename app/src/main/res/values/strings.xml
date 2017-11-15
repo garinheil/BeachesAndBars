@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Beaches and Bars</string>
+    <string name="beach_favs_header">My Beach Favorites</string>
+    <string name="bar_favs_header">My Bar Favorites</string>
+    <string-array name="beach_favorites">
+        <item>Beach 1</item>
+        <item>Beach 2</item>
+        <item>Beach 3</item>
+    </string-array>
+    <string-array name="bar_favorites">
+        <item>Bar 1</item>
+        <item>Bar 2</item>
+        <item>Bar 3</item>
+    </string-array>
+</resources>
