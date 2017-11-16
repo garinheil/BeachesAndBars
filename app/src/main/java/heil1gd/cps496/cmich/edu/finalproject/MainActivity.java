@@ -1,5 +1,13 @@
 package heil1gd.cps496.cmich.edu.finalproject;
 
+/*
+ *
+ * Authors: Garin Heil & Cameron Stoel
+ *
+ *
+ *
+ */
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
