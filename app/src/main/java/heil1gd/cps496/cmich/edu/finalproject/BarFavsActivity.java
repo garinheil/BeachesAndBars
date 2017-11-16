@@ -6,16 +6,21 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class BarFavsActivity extends Activity implements AdapterView.OnItemClickListener {
 
     ListView listFavorites;
+    TextView header;
     String[] bar_favorites;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites);
+
+        header = findViewById(R.id.textFavsHeader);
+        header.setText(getString(R.string.bar_favs_header));
 
         bar_favorites = getResources().getStringArray(R.array.bar_favorites);
         listFavorites = findViewById(R.id.listFavorites);

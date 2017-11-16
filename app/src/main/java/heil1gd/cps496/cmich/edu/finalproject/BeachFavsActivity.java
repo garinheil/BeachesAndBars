@@ -11,12 +11,16 @@ import android.widget.TextView;
 public class BeachFavsActivity extends Activity implements AdapterView.OnItemClickListener {
 
     ListView listFavorites;
+    TextView header;
     String[] beach_favorites;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites);
+
+        header = findViewById(R.id.textFavsHeader);
+        header.setText(getString(R.string.beach_favs_header));
 
         beach_favorites = getResources().getStringArray(R.array.beach_favorites);
         listFavorites = findViewById(R.id.listFavorites);
