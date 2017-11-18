@@ -14,7 +14,7 @@ public class Favorites {
 
     // Overloaded constructor - will need to send in the proper parameters
     // when we figure out what will be stored in our favorites class
-//    public Favorites(parameters for overloaded favorites constructor) {
+//    public Favorites(String name, String date, String descr) {
 //        this.name = name;
 //        this.date = date;     // Example info that may be stored
 //        this.descr = descr;
