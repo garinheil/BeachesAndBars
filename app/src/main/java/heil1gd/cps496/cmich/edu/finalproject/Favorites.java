@@ -2,6 +2,12 @@ package heil1gd.cps496.cmich.edu.finalproject;
 
 /**
  * Created by heilg on 11/15/2017.
+ *
+ * Description: This generic class stores information related to a user's
+ *              favorite beach or bar, including the location's name, the
+ *              date that the user went to the beach (or added the location
+ *              to their favorites), the address, and any comments the user
+ *              would wish the include about the location.
  */
 
 public class Favorites {
