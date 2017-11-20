@@ -5,26 +5,61 @@ package heil1gd.cps496.cmich.edu.finalproject;
  */
 
 public class Favorites {
-    //String name, date, descr;
+    private String name, date, addr, cmts;
 
     // Default Favorites class constructor
     public Favorites() {
-
+        name = "";
+        date = "";
+        addr = "";
+        cmts = "";
     }
 
-    // Overloaded constructor - will need to send in the proper parameters
-    // when we figure out what will be stored in our favorites class
-//    public Favorites(String name, String date, String descr) {
+    // Overloaded constructor
+    public Favorites(String name, String date, String addr, String cmts) {
+        this.name = name;
+        this.date = date;
+        this.addr = addr;
+        this.cmts = cmts;
+    }
+
+//    // Overloaded constructor, allows no user comments
+//    public Favorites(String name, String date, String addr) {
 //        this.name = name;
-//        this.date = date;     // Example info that may be stored
-//        this.descr = descr;
+//        this.date = date;
+//        this.addr = addr;
 //    }
 
-    // Example getter and setter
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//    public String getName() {
-//        return name;
-//    }
+    // Getters and setters
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setAddr(String addr) {
+        this.addr = addr;
+    }
+
+    public String getAddr() {
+        return addr;
+    }
+
+    public void setCmts(String cmts) {
+        this.cmts = cmts;
+    }
+
+    public String getCmts() {
+        return cmts;
+    }
 }
