@@ -40,10 +40,11 @@ public class MainActivity extends AppCompatActivity {
                 beachFav.setAddr("1234 Beach Ave, Beach City MI, 54321");
                 beachFav.setCmts("Love this beach! Will definitely go again and bring the whole family!");
                 beachFavsList.add(beachFav);
-                Log.d("Beach name", beachFav.getName());
-                Log.d("Date", beachFav.getDate());
-                Log.d("Beach address", beachFav.getAddr());
-                Log.d("Personal Comments", beachFav.getCmts());
+                beachFavsList.get(0);
+                Log.d("Beach 0", beachFavsList.get(0).toString());
+//                Log.d("Date", beachFav.getDate());
+//                Log.d("Beach address", beachFav.getAddr());
+//                Log.d("Personal Comments", beachFav.getCmts());
                 Intent beachFavsIntent = new Intent(MainActivity.this, BeachFavsActivity.class);
                 startActivity(beachFavsIntent);
                 break;
