@@ -29,12 +29,10 @@ public class Favorites {
         this.cmts = cmts;
     }
 
-//    // Overloaded constructor, allows no user comments
-//    public Favorites(String name, String date, String addr) {
-//        this.name = name;
-//        this.date = date;
-//        this.addr = addr;
-//    }
+    // Overrides the default toString method in order to place the information into an arraylist
+    public String toString() {
+        return name + " " + date + " " + addr + " " + cmts;
+    }
 
     // Getters and setters
     public void setName(String name) {
