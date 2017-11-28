@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
                 beachFav.setName((String) place.getName());
                 Log.d("GetName", (String) place.getName());
                 beachFav.setAddr((String) place.getAddress());
-                Log.d("GetAddr", (String) place.getAddress());
+                Log.d("GetAddrs", (String) place.getAddress());
 
                 if (place.getAttributions() == null) {
                    // webTxt.loadData("No attribution", "text/html; charset=utf-8", "UTF-8");
