@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final static int MY_PERMISSION_FINE_LOCATION = 1;
     private final static int PLACE_PICKER_REQUEST = 101;
+
     private final static LatLngBounds bounds = new LatLngBounds(new LatLng(41.79,-87.03),(new LatLng(45.6,-84.30)));
     ImageButton getBeachBtn,getBarBtn, barFavBtn, beachFavBtn;
 
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+
                 try{
                     Intent intent = builder.build(MainActivity.this);
                     builder.setLatLngBounds(bounds);
@@ -195,7 +197,10 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(data, MainActivity.this);
                 beachFav.setName((String) place.getName());
+                Log.d("GetName", (String) place.getName());
                 beachFav.setAddr((String) place.getAddress());
+                Log.d("GetAddr", (String) place.getAddress());
+
                 if (place.getAttributions() == null) {
                    // webTxt.loadData("No attribution", "text/html; charset=utf-8", "UTF-8");
                 } else {
