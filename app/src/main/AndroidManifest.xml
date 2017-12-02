@@ -8,7 +8,7 @@
          location permissions for the 'MyLocation' functionality.
     -->
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -40,15 +40,18 @@
         -->
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"/>
-
+            android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCWE6EQPhhI09J5IVsT3_V6VDKRzI9Qtds" />
+            android:value="AIzaSyA5lqs2QG6OE4Y4KsxnuMbJAWA3kYKZTYA" />
 
-        <activity android:label="@string/beach_favs_header" android:name=".BeachFavsActivity"/>
-        <activity android:label="@string/bar_favs_header" android:name=".BarFavsActivity"/>
-        <activity android:label="@string/app_name" android:name=".MapsActivity"/>
+        <activity
+            android:name=".BeachFavsActivity"
+            android:label="@string/beach_favs_header" />
+        <activity
+            android:name=".BarFavsActivity"
+            android:label="@string/bar_favs_header" />
+        <activity android:name=".MapsActivity"></activity>
     </application>
 
 </manifest>
