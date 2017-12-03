@@ -58,14 +58,17 @@ public class MainActivity extends AppCompatActivity {
         barFavoritesArrayList.clear();
 
         // Call method that places information in proper arraylist
-        placeIntoArrayList("beach", beachSplitArrayListString, beachFavoritesArrayList);
-        placeIntoArrayList("bar", barSplitArrayListString, barFavoritesArrayList);
+        placeIntoArrayList(beachSplitArrayListString, beachFavoritesArrayList);
+        placeIntoArrayList(barSplitArrayListString, barFavoritesArrayList);
+
+        Log.d("beachFavs ArrayList", beachFavoritesArrayList.toString());
+        Log.d("barFavs ArrayList", barFavoritesArrayList.toString());
 
         Log.d("Beach Read String", beachReadString);
         Log.d("Bar Read String", barReadString);
     }
 
-    private void placeIntoArrayList(String type, String [] splitString, ArrayList<Favorites> arrayList) {
+    private void placeIntoArrayList(String [] splitString, ArrayList<Favorites> arrayList) {
         for(int i = 0; i < splitString.length; i++) {
             // Trim any leading or trailing whitespace from the string
             String favString = splitString[i].trim();
@@ -84,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
 
             // Add the favorite to the Favorites ArrayList
             arrayList.add(fav);
-            Log.d("ArrayList After Read", arrayList.toString());
         }
     }
 }
