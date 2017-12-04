@@ -1,28 +1,57 @@
 package heil1gd.cps496.cmich.edu.readwritetest;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ListView favListView;
+    public int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        favListView = findViewById(R.id.favoritesListView);
+        favListView.setLongClickable(true);
+
+        favListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int pos, long id) {
+                position = pos;
+                Log.d("Long click", "Position: " + pos);
+                startActivityForResult(new Intent(getApplicationContext(), cmtsPopup.class), 999);
+                return true;
+            }
+        });
+
         // Create some example beach favorites
-        Favorites beachFav1In = new Favorites("Sandy Beach", "11/30/2017", "12345 Sandy Beach Dr Fruitport MI 49415", "Love this beach! Will definitely have to go again.");
+        Favorites beachFav1In = new Favorites("Sandy Beach", "11/30/2017", "12345 Sandy Beach Dr Fruitport MI 49415", " ");
         Favorites beachFav2In = new Favorites("Crystal Beach", "12/5/2017", "66666 Crystal Beach Dr Hell MI 48666", "Sand was really hot!");
 
         Favorites barFav1In = new Favorites("Hip Bar", "6/6/6666", "666 Natas Ln Chicago IL 39555", "This place is so fetch.");
 
+        ArrayList<String> test = new ArrayList<>();
+        test.add(beachFav1In.toStringForDisplay());
+
         // Throw them into an arraylist
         ArrayList<Favorites> beachFavoritesArrayList = new ArrayList<>();
+        ArrayList<String> beachFavListForDisplay = new ArrayList<>();
         beachFavoritesArrayList.add(beachFav1In);
         beachFavoritesArrayList.add(beachFav2In);
+        beachFavListForDisplay.add(beachFav1In.toStringForDisplay());
+        beachFavListForDisplay.add(beachFav2In.toStringForDisplay());
+
         ArrayList<Favorites> barFavoritesArrayList = new ArrayList<>();
         barFavoritesArrayList.add(barFav1In);
 
@@ -55,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         // Clear the favorites for this example
         // in order to read into a fresh arraylist
         beachFavoritesArrayList.clear();
+        //beachFavListForDisplay.clear();
         barFavoritesArrayList.clear();
 
         // Call method that places information in proper arraylist
@@ -66,8 +96,14 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d("Beach Read String", beachReadString);
         Log.d("Bar Read String", barReadString);
+
+//        ArrayAdapter<Favorites> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, beachFavoritesArrayList);
+//        favListView.setAdapter(arrayAdapter);
+        ArrayAdapter<String> testAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, beachFavListForDisplay);
+        favListView.setAdapter(testAdapter);
     }
 
+    // Generic method that places favorites into the proper arraylists
     private void placeIntoArrayList(String [] splitString, ArrayList<Favorites> arrayList) {
         for(int i = 0; i < splitString.length; i++) {
             // Trim any leading or trailing whitespace from the string
@@ -87,6 +123,13 @@ public class MainActivity extends AppCompatActivity {
 
             // Add the favorite to the Favorites ArrayList
             arrayList.add(fav);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 999 && resultCode == RESULT_OK) {
+            Log.d("Item", favListView.getItemAtPosition(position).toString() + data.getStringExtra("comment"));
         }
     }
 }
