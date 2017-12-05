@@ -31,7 +31,11 @@ public class Favorites {
 
     // Overrides the default toString method in order to place the information into an arraylist
     public String toString() {
-        return name + " " + date + " " + addr + " " + cmts;
+        return name + ";" + date + ";" + addr + ";" + cmts + ";";
+    }
+
+    public String toStringForDisplay() {
+        return name + "\n" + date + "\n" + addr + "\n" + cmts;
     }
 
     // Getters and setters

@@ -5,8 +5,6 @@
     android:layout_height="match_parent">
 
 
-
-
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:map="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -14,10 +12,10 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context="com.example.priyanka.mapsdemo.MapsActivity"
-        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_below="@+id/B_bars" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tv_PinDetail"
+        tools:context="com.example.priyanka.mapsdemo.MapsActivity" />
 
     <Button
         android:id="@+id/B_bars"
@@ -37,9 +35,22 @@
         android:onClick="onClick"
         android:text="Beaches" />
 
+    <TextView
+        android:id="@+id/tv_PinDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/B_bars"
+        android:text="TextView" />
 
-
-
+    <Button
+        android:id="@+id/btn_AddFav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:onClick="onClick"
+        android:text="Add Favorite" />
 
 
 </RelativeLayout>

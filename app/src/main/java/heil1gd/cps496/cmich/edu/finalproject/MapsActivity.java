@@ -32,6 +32,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.w3c.dom.Text;
 
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -47,6 +51,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     int PROXIMITY_RADIUS = 10000;
     double latitude,longitude;
     public TextView tvPlaceMarker;
+    public String favType, favName, favAddrs;
+    public Favorites beachFav;
+    public Favorites barFav;
+    public static ArrayList<Favorites> beachFavArrayList = new ArrayList<>();
+    public static ArrayList<Favorites> barFavArrayList = new ArrayList<>();
+    public static ArrayList<String> beachFavDisplay = new ArrayList<>();
+    public static ArrayList<String> barFavDisplay = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,6 +169,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.clear();
 
                 String bars = "bar";
+                favType = bars;
                 String url = getUrl(latitude, longitude, bars);
                 dataTransfer[0] = mMap;
                 dataTransfer[1] = url;
@@ -170,6 +182,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             case R.id.B_beaches:
                 mMap.clear();
                 String beach = "beach";
+                favType = beach;
                 url = getUrl(latitude, longitude, beach);
                 dataTransfer[0] = mMap;
                 dataTransfer[1] = url;
@@ -178,7 +191,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Toast.makeText(MapsActivity.this, "Showing Nearby Beaches", Toast.LENGTH_SHORT).show();
 
             case R.id.btn_AddFav:
-
+                Date date = new Date();
+                ReadWrite readWrite = new ReadWrite();
+                String favDate = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
+                String favCmt = "Default comment.";
+                if(favType.equals("beach")) {
+                    beachFav = new Favorites(favName, favDate, favAddrs, favCmt);
+                    Log.d("BeachFavorite added", beachFav.toString());
+                    beachFavArrayList.add(beachFav);
+                    beachFavDisplay.add(beachFav.toStringForDisplay());
+                    for(int i = 0; i < beachFavArrayList.size(); i++)
+                        readWrite.writeToFile("beach", beachFavArrayList.toString(), this);
+                } else if(favType.equals("bar")) {
+                    barFav = new Favorites(favName, favDate, favAddrs, favCmt);
+                    Log.d("BarFavorite added", barFav.toString());
+                    barFavArrayList.add(barFav);
+                    barFavDisplay.add(barFav.toStringForDisplay());
+                    for(int i = 0; i < barFavArrayList.size(); i++)
+                        readWrite.writeToFile("bar", barFavArrayList.toString(), this);
+                }
 
 
 
@@ -189,11 +220,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public boolean onMarkerClick(Marker marker) {
 
-                marker.getTitle();
+                String[] favInfo = marker.getTitle().split(":");
+                favName = favInfo[0].trim();
+                favAddrs = favInfo[1].trim();
+                String[] delComma = favAddrs.split(",");
+                String before = delComma[0];
+                String after = delComma[1];
+                favAddrs = before + after;
+                Log.d(("favName"), favName);
+                Log.d(("favAddrs"), favAddrs);
 
                 Log.d("MarkerTitle", marker.getTitle());
 
-                 tvPlaceMarker.setText(marker.getTitle());
+                tvPlaceMarker.setText(marker.getTitle());
 
                 return true;
             }

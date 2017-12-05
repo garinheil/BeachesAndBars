@@ -1,12 +1,15 @@
 package heil1gd.cps496.cmich.edu.finalproject;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class BeachFavsActivity extends Activity implements AdapterView.OnItemClickListener {
 
@@ -22,11 +25,60 @@ public class BeachFavsActivity extends Activity implements AdapterView.OnItemCli
         header = findViewById(R.id.textFavsHeader);
         header.setText(getString(R.string.beach_favs_header));
 
+
+
+        ReadWrite readWrite = new ReadWrite();
+        String beachString = readWrite.readFromFile("beach", this);
+        String beachReadStringNoBrackets = beachString.substring(1, beachString.length() - 1);
+        String[] beachSplitArrayListString = beachReadStringNoBrackets.split(",");
+
+        placeIntoArrayList(beachSplitArrayListString, MapsActivity.beachFavArrayList);
+
         beach_favorites = getResources().getStringArray(R.array.beach_favorites);
         listFavorites = findViewById(R.id.listFavorites);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, beach_favorites);
-        listFavorites.setAdapter(adapter);
+        ArrayAdapter<Favorites> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, MapsActivity.beachFavArrayList);
+        listFavorites.setAdapter(arrayAdapter);
         listFavorites.setOnItemClickListener(this);
+
+        listFavorites.setLongClickable(true);
+
+        listFavorites.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int pos, long id) {
+                startActivityForResult(new Intent(getApplicationContext(), cmtsPopup.class), 999);
+                return true;
+            }
+        });
+    }
+
+    // Generic method that places favorites into the proper arraylists
+    private void placeIntoArrayList(String [] splitString, ArrayList<Favorites> arrayList) {
+        for(int i = 0; i < splitString.length; i++) {
+            // Trim any leading or trailing whitespace from the string
+            String favString = splitString[i].trim();
+
+            // Split the favorite based a ';' since the string is delimited by that
+            String[] favSplit = favString.split(";");
+
+            // Parse the split data into their respective variables
+            String name = favSplit[0];
+            String date = favSplit[1];
+            String addrs = favSplit[2];
+            String cmts = favSplit[3];
+
+            // Add the information to an individual favorite
+            Favorites fav = new Favorites(name, date, addrs, cmts);
+
+            // Add the favorite to the Favorites ArrayList
+            MapsActivity.beachFavArrayList.add(fav);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 999 && resultCode == RESULT_OK) {
+            //Log.d("Item", favListView.getItemAtPosition(position).toString() + data.getStringExtra("comment"));
+        }
     }
 
     @Override

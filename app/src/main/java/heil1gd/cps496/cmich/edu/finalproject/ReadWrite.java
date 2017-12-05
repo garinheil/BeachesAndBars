@@ -19,68 +19,75 @@ import java.util.ArrayList;
  */
 
 public class ReadWrite {
-    public void writeToFile(String favType, ArrayList<Favorites> arr, Context context) {
-        try {
-            if(favType.equals("beach")) {
-                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("beachFavs.txt", Context.MODE_PRIVATE));
-                outputStreamWriter.write(arr.toString());
-                outputStreamWriter.close();
-            } else if(favType.equals("bar")) {
-                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("barFavs.txt", Context.MODE_PRIVATE));
-                outputStreamWriter.write(arr.toString());
-                outputStreamWriter.close();
-            }
+    // Determines the favorite type and sends the data to be written
+    public void writeToFile(String type, String data, Context context) {
+        if(type.equals("beach")) {
+            Log.d("In writeToFile", type);
+            performWrite(type, data, context);
+        } else if(type.equals("bar")) {
+            Log.d("In writeToFile", type);
+            performWrite(type, data, context);
         }
-        catch (IOException e) {
+    }
+
+    // Determines the favorite type and reads from the proper file
+    public String readFromFile(String type, Context context) {
+        String returnString = "";
+        if(type.equals("beach")) {
+            Log.d("In readFromFile", type);
+            returnString = performRead(type, context);
+        } else if(type.equals("bar")) {
+            Log.d("In readFromFile", type);
+            returnString = performRead(type, context);
+        }
+
+        return returnString;
+    }
+
+    // Performs the actual writing to file, given a favorite type and the data as well as context
+    private void performWrite(String type, String data, Context context) {
+        try {
+            Log.d("Writing to file", type + "Favs.txt");
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(type + "Favs.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(data);
+            outputStreamWriter.close();
+        } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
         }
     }
 
-    public String readFromFile(String favType, Context context) {
-
-        String ret = "";
+    // Performs the actual file reading from the proper file, given a favorite type a context
+    private String performRead(String type, Context context) {
+        String returnString = "";
 
         try {
+            InputStream inputStream = context.openFileInput(type + "Favs.txt");
+            if (inputStream != null) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
 
-            if(favType.equals("beach")) {
-                InputStream inputStream = context.openFileInput("beachFavs.txt");
-                if (inputStream != null) {
-                    InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                    String receiveString = "";
-                    StringBuilder stringBuilder = new StringBuilder();
-
-                    while ( (receiveString = bufferedReader.readLine()) != null ) {
+                try {
+                    while ((receiveString = bufferedReader.readLine()) != null) {
                         stringBuilder.append(receiveString);
                     }
-
-                    inputStream.close();
-                    ret = stringBuilder.toString();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            } else if(favType.equals("bar")) {
-                InputStream inputStream = context.openFileInput("barFavs.txt");
-                if (inputStream != null) {
-                    InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                    String receiveString = "";
-                    StringBuilder stringBuilder = new StringBuilder();
 
-                    while ( (receiveString = bufferedReader.readLine()) != null ) {
-                        stringBuilder.append(receiveString);
-                    }
-
+                try {
                     inputStream.close();
-                    ret = stringBuilder.toString();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
+                returnString = stringBuilder.toString();
             }
-        }
-        catch (FileNotFoundException e) {
-            Log.e("file read", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("file read", "Can not read file: " + e.toString());
+        } catch (FileNotFoundException e1) {
+            e1.printStackTrace();
         }
 
-        return ret;
+        return returnString;
     }
 }
 
