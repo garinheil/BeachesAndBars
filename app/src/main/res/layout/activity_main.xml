@@ -14,12 +14,12 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="10dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginEnd="5dp"
         android:background="?selectableItemBackgroundBorderless"
         android:elevation="0dp"
         android:onClick="onClick"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imgBtnBars"
         app:srcCompat="@drawable/favorites_256" />
 
     <ImageButton
@@ -54,23 +54,25 @@
         android:id="@+id/imgBtnBeachFavs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
         android:background="?selectableItemBackgroundBorderless"
         android:onClick="onClick"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgBtnBeaches"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/favorites_256" />
 
-    <Button
-        android:id="@+id/btnSaveforLater"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="88dp"
-        android:layout_marginTop="228dp"
+    <ImageButton
+        android:id="@+id/btnSaveForLater"
+        android:layout_width="171dp"
+        android:layout_height="173dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="?selectableItemBackgroundBorderless"
         android:onClick="onClick"
-        android:text="Busy? Save em for later!"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/imgBtnBars"
+        app:layout_constraintStart_toEndOf="@+id/imgBtnBeaches"
+        app:srcCompat="@drawable/add_to_favs"
+        tools:layout_editor_absoluteY="169dp" />
 
 </android.support.constraint.ConstraintLayout>
