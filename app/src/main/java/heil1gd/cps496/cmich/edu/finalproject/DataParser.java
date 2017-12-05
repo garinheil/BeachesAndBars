@@ -1,6 +1,7 @@
 package heil1gd.cps496.cmich.edu.finalproject;
 
 import android.util.Log;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,7 +15,9 @@ import java.util.List;
  * @author Priyanka
  */
 
-public class DataParser {
+public class DataParser extends MapsActivity {
+
+
 
     private HashMap<String, String> getPlace(JSONObject googlePlaceJson)
     {
@@ -48,10 +51,12 @@ public class DataParser {
             googlePlaceMap.put("reference", reference);
 
 
+
         }
         catch (JSONException e) {
             e.printStackTrace();
         }
+
         return googlePlaceMap;
 
     }
@@ -70,6 +75,7 @@ public class DataParser {
                 e.printStackTrace();
             }
         }
+
         return placelist;
     }
 
@@ -86,6 +92,8 @@ public class DataParser {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
         return getPlaces(jsonArray);
     }
+
 }

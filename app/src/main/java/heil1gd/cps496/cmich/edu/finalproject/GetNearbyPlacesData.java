@@ -2,12 +2,16 @@ package heil1gd.cps496.cmich.edu.finalproject;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -21,6 +25,8 @@ class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
 
     private String googlePlacesData;
     private GoogleMap mMap;
+    String placeName, vicinity;
+    TextView tv_PlaceMarker;
     String url;
 
     @Override
@@ -46,7 +52,10 @@ class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
         nearbyPlaceList = parser.parse(s);
         Log.d("nearbyplacesdata","called parse method");
         showNearbyPlaces(nearbyPlaceList);
+
+
     }
+
 
     private void showNearbyPlaces(List<HashMap<String, String>> nearbyPlaceList)
     {
@@ -55,8 +64,8 @@ class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
             MarkerOptions markerOptions = new MarkerOptions();
             HashMap<String, String> googlePlace = nearbyPlaceList.get(i);
 
-            String placeName = googlePlace.get("place_name");
-            String vicinity = googlePlace.get("vicinity");
+            placeName = googlePlace.get("place_name");
+            vicinity = googlePlace.get("vicinity");
             double lat = Double.parseDouble( googlePlace.get("lat"));
             double lng = Double.parseDouble( googlePlace.get("lng"));
 
