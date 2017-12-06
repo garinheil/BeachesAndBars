@@ -177,8 +177,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 getNearbyPlacesData.execute(dataTransfer);
                 Toast.makeText(MapsActivity.this, "Showing Nearby Bars", Toast.LENGTH_SHORT).show();
                 break;
-
-
             case R.id.B_beaches:
                 mMap.clear();
                 String beach = "beach";
@@ -189,7 +187,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 getNearbyPlacesData.execute(dataTransfer);
                 Toast.makeText(MapsActivity.this, "Showing Nearby Beaches", Toast.LENGTH_SHORT).show();
-
+                break;
             case R.id.btn_AddFav:
                 Date date = new Date();
                 ReadWrite readWrite = new ReadWrite();
@@ -210,9 +208,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     for(int i = 0; i < barFavArrayList.size(); i++)
                         readWrite.writeToFile("bar", barFavArrayList.toString(), this);
                 }
-
-
-
+                Toast.makeText(MapsActivity.this, "Favorite Added to List", Toast.LENGTH_SHORT).show();
                 break;
 
         }
