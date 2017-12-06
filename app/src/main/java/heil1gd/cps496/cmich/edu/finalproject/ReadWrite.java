@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 /**
  * Created by heilg on 11/20/2017.
- * <p>
+ *
  * Description: This class will be used to write to and read from a file in user storage.
  */
 

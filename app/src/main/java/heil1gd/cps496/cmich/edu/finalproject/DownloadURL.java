@@ -13,8 +13,6 @@ import java.net.URL;
  * @author Priyanka
  */
 
-
-
 public class DownloadURL {
 
     public String readUrl(String myUrl) throws IOException

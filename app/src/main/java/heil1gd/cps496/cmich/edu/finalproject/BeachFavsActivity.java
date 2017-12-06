@@ -25,8 +25,7 @@ public class BeachFavsActivity extends Activity implements AdapterView.OnItemCli
         header = findViewById(R.id.textFavsHeader);
         header.setText(getString(R.string.beach_favs_header));
 
-
-
+        // Read the Favorites from the file
         ReadWrite readWrite = new ReadWrite();
         String beachString = readWrite.readFromFile("beach", this);
         String beachReadStringNoBrackets = beachString.substring(1, beachString.length() - 1);

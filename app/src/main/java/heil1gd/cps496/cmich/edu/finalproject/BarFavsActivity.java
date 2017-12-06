@@ -26,7 +26,7 @@ public class BarFavsActivity extends Activity implements AdapterView.OnItemClick
         header = findViewById(R.id.textFavsHeader);
         header.setText(getString(R.string.bar_favs_header));
 
-
+        // Read the Favorites from the file
         ReadWrite readWrite = new ReadWrite();
         String beachString = readWrite.readFromFile("beach", this);
         String beachReadStringNoBrackets = beachString.substring(1, beachString.length() - 1);

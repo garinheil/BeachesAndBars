@@ -16,9 +16,6 @@ import java.util.List;
  */
 
 public class DataParser extends MapsActivity {
-
-
-
     private HashMap<String, String> getPlace(JSONObject googlePlaceJson)
     {
         HashMap<String, String> googlePlaceMap = new HashMap<>();
@@ -49,9 +46,6 @@ public class DataParser extends MapsActivity {
             googlePlaceMap.put("lat", latitude);
             googlePlaceMap.put("lng", longitude);
             googlePlaceMap.put("reference", reference);
-
-
-
         }
         catch (JSONException e) {
             e.printStackTrace();
