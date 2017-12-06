@@ -1,6 +1,5 @@
 package heil1gd.cps496.cmich.edu.finalproject;
 
-import android.*;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -9,13 +8,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -29,19 +26,23 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import org.w3c.dom.Text;
-
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+/*
+ *
+ * MapsActivity allows a user to display nearby beaches or bars, and then if
+ * they so desire, add them to their favorites list.
+ *
+ */
+
+
+// MapsActivity class
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
-
-
     private GoogleMap mMap;
     private GoogleApiClient client;
     private LocationRequest locationRequest;
@@ -63,8 +64,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        tvPlaceMarker = (TextView) findViewById(R.id.tv_PinDetail);
-        tvPlaceMarker.setText("Name" + " : " + "Address");
+        tvPlaceMarker = findViewById(R.id.tv_PinDetail);
+        tvPlaceMarker.setText(getString(R.string.nameAddrPH));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         {
@@ -131,6 +132,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+
+    // Get the user's location when they request beaches or bars
     @Override
     public void onLocationChanged(Location location) {
 
@@ -155,7 +158,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-
+    // Called when the user clicks one of three buttons:
+    // B_bars, B_beaches, or btn_AddFav
     public void onClick(View v)
     {
         Object dataTransfer[] = new Object[2];
@@ -164,31 +168,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         switch(v.getId())
         {
-
-            case R.id.B_bars:
+            case R.id.B_bars: // Case when a user requests nearby bars
                 mMap.clear();
-
                 String bars = "bar";
                 favType = bars;
                 String url = getUrl(latitude, longitude, bars);
                 dataTransfer[0] = mMap;
                 dataTransfer[1] = url;
-
                 getNearbyPlacesData.execute(dataTransfer);
                 Toast.makeText(MapsActivity.this, "Showing Nearby Bars", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.B_beaches:
+            case R.id.B_beaches: // Case when a user requests nearby bars
                 mMap.clear();
                 String beach = "beach";
                 favType = beach;
                 url = getUrl(latitude, longitude, beach);
                 dataTransfer[0] = mMap;
                 dataTransfer[1] = url;
-
                 getNearbyPlacesData.execute(dataTransfer);
                 Toast.makeText(MapsActivity.this, "Showing Nearby Beaches", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.btn_AddFav:
+            case R.id.btn_AddFav: // Case when a user wants to add a location to his/her favorites list
                 Date date = new Date();
                 ReadWrite readWrite = new ReadWrite();
                 String favDate = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
@@ -212,6 +212,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 break;
 
         }
+
+        // ClickListener that checks for actions on the map markers
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {

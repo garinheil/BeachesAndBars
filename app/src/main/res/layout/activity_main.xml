@@ -63,7 +63,7 @@
         app:srcCompat="@drawable/favorites_256" />
 
     <ImageButton
-        android:id="@+id/btnSaveForLater"
+        android:id="@+id/imgBtnSaveFavs"
         android:layout_width="171dp"
         android:layout_height="173dp"
         android:layout_alignParentStart="true"
