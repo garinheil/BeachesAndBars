@@ -34,7 +34,7 @@ public class BarFavsActivity extends Activity implements AdapterView.OnItemClick
 
         placeIntoArrayList(beachSplitArrayListString, MapsActivity.beachFavArrayList);
 
-        bar_favorites = getResources().getStringArray(R.array.bar_favorites);
+       // bar_favorites = getResources().getStringArray(R.array.bar_favorites);
         listFavorites = findViewById(R.id.listFavorites);
         ArrayAdapter<Favorites> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, MapsActivity.barFavArrayList);
         listFavorites.setAdapter(arrayAdapter);

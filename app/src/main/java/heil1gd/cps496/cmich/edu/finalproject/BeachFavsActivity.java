@@ -33,7 +33,7 @@ public class BeachFavsActivity extends Activity implements AdapterView.OnItemCli
 
         placeIntoArrayList(beachSplitArrayListString, MapsActivity.beachFavArrayList);
 
-        beach_favorites = getResources().getStringArray(R.array.beach_favorites);
+       // beach_favorites = getResources().getStringArray(R.array.beach_favorites);
         listFavorites = findViewById(R.id.listFavorites);
         ArrayAdapter<Favorites> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, MapsActivity.beachFavArrayList);
         listFavorites.setAdapter(arrayAdapter);
