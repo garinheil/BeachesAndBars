@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //set the variables to buttons
         getBeachBtn = findViewById(R.id.imgBtnBeaches);
         getBarBtn = findViewById(R.id.imgBtnBars);
         barFavBtn = findViewById(R.id.imgBtnBarFavs);
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                Uri gmmIntentUri = Uri.parse("geo:0,0?q=beach");
+                Uri gmmIntentUri = Uri.parse("geo:0,0?q=beach near me");
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 startActivityForResult(mapIntent, PLACE_PICKER_REQUEST);
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                Uri gmmIntentUri = Uri.parse("geo:0,0?q=bars");
+                Uri gmmIntentUri = Uri.parse("geo:0,0?q=bars near me");
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 startActivityForResult(mapIntent, PLACE_PICKER_REQUEST);

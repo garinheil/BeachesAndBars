@@ -136,21 +136,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     // Get the user's location when they request beaches or bars
     @Override
     public void onLocationChanged(Location location) {
-
+        //get the current location of the user
         latitude = location.getLatitude();
         longitude = location.getLongitude();
         lastlocation = location;
+        //remove location if not null
         if(currentLocationmMarker != null)
         {
             currentLocationmMarker.remove();
 
         }
         Log.d("lat = ",""+latitude);
+        //set lat and long and set the current location
         LatLng latLng = new LatLng(location.getLatitude() , location.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.title("Current Location");
+        //color each marker blue
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+        // move the map to the locations and zoom
         currentLocationmMarker = mMap.addMarker(markerOptions);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomBy(10));
@@ -217,7 +221,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-
+                //format the response and eliminate the comma
                 String[] favInfo = marker.getTitle().split(":");
                 favName = favInfo[0].trim();
                 favAddrs = favInfo[1].trim();
